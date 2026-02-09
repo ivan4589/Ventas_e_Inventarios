@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Productos - Sistema Bolivia</title>
+    <link rel="stylesheet" href="../frontend/css/productos-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Menú lateral -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-chart-pie"></i>
+                    <h2>Gestión Bolivia</h2>
+                </div>
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="user-details">
+                        <h3>Administrator</h3>
+                        <p class="user-role">Administrador del Sistema</p>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="sidebar-menu">
+                <div class="menu-section">
+                    <h4 class="menu-title">MENÚ PRINCIPAL</h4>
+                    <ul class="menu-items">
+                        <li class="menu-item">
+                            <a href="dashboard.html">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="menu-section">
+                    <h4 class="menu-title">OPERACIONES</h4>
+                    <ul class="menu-items">
+                        <li class="menu-item">
+                            <a href="#">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span>Ventas</span>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#">
+                                <i class="fas fa-money-bill-wave"></i>
+                                <span>Cobranza</span>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#">
+                                <i class="fas fa-shopping-bag"></i>
+                                <span>Compras</span>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#">
+                                <i class="fas fa-boxes"></i>
+                                <span>Inventario</span>
+                            </a>
+                        </li>
+                        <li class="menu-item active">
+                            <a href="#">
+                                <i class="fas fa-tags"></i>
+                                <span>Productos</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="menu-section">
+                    <h4 class="menu-title">GESTIÓN</h4>
+                    <ul class="menu-items">
+                        <li class="menu-item">
+                            <a href="proveedores.html">
+                                <i class="fas fa-truck"></i>
+                                <span>Proveedores</span>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="clientes.html">
+                                <i class="fas fa-users"></i>
+                                <span>Clientes</span>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#">
+                                <i class="fas fa-chart-bar"></i>
+                                <span>Reportes</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="menu-section">
+                    <h4 class="menu-title">CONFIGURACIÓN</h4>
+                    <ul class="menu-items">
+                        <li class="menu-item">
+                            <a href="#">
+                                <i class="fas fa-cog"></i>
+                                <span>Ajustes</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-footer">
+                    <div class="system-info">
+                        <p><i class="fas fa-info-circle"></i> Versión 2.4.3</p>
+                        <p><i class="fas fa-database"></i> Estado: <span class="status-active">Activo</span></p>
+                    </div>
+                    <button class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                    </button>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Contenido principal -->
+        <div class="main-wrapper">
+            <header class="header">
+                <div class="header-left">
+                    <button class="menu-toggle" id="menuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="breadcrumb">
+                        <span>Operaciones</span>
+                        <i class="fas fa-chevron-right"></i>
+                        <span>Productos</span>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="header-controls">
+                        <div class="date-selector">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Junio 2024</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="notification-bell">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-count">5</span>
+                        </div>
+                        <div class="user-menu">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="main-content">
+                <!-- Encabezado de la página -->
+                <div class="page-header">
+                    <div class="page-title">
+                        <h1><i class="fas fa-tags"></i> Gestión de Productos</h1>
+                        <p class="page-subtitle">Administre su catálogo de productos, precios y niveles de inventario.</p>
+                    </div>
+                    <button class="add-product-btn" id="addProductBtn">
+                        <i class="fas fa-plus-circle"></i> Agregar Producto
+                    </button>
+                </div>
+
+                <!-- Métricas de productos -->
+                <section class="metrics-grid">
+                    <div class="metric-card primary">
+                        <div class="metric-header">
+                            <h3>TOTAL PRODUCTOS</h3>
+                            <i class="fas fa-cubes"></i>
+                        </div>
+                        <div class="metric-value">156</div>
+                        <div class="metric-change positive">
+                            <i class="fas fa-arrow-up"></i> +12 este mes
+                        </div>
+                    </div>
+
+                    <div class="metric-card secondary">
+                        <div class="metric-header">
+                            <h3>VALOR INVENTARIO</h3>
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="metric-value">Bs. 45.820,00</div>
+                        <div class="metric-description">
+                            Valor total en stock
+                        </div>
+                    </div>
+
+                    <div class="metric-card warning">
+                        <div class="metric-header">
+                            <h3>STOCK BAJO</h3>
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="metric-value">18 productos</div>
+                        <div class="metric-alert">
+                            3 Críticos
+                        </div>
+                    </div>
+
+                    <div class="metric-card info">
+                        <div class="metric-header">
+                            <h3>CATEGORÍAS</h3>
+                            <i class="fas fa-layer-group"></i>
+                        </div>
+                        <div class="metric-value">12</div>
+                        <div class="metric-description">
+                            Categorías activas
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Listado de productos -->
+                <section class="products-section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-list"></i> Catálogo de Productos</h3>
+                        <div class="section-actions">
+                            <div class="search-box">
+                                <i class="fas fa-search"></i>
+                                <input type="text" id="searchProduct" placeholder="Buscar producto...">
+                            </div>
+                            <div class="filters">
+                                <div class="filter-dropdown">
+                                    <select id="categoryFilter">
+                                        <option value="">Todas las categorías</option>
+                                        <option value="alimentos">Alimentos</option>
+                                        <option value="bebidas">Bebidas</option>
+                                        <option value="limpieza">Limpieza</option>
+                                        <option value="medicamentos">Medicamentos</option>
+                                        <option value="electronica">Electrónica</option>
+                                    </select>
+                                </div>
+                                <div class="filter-dropdown">
+                                    <select id="stockFilter">
+                                        <option value="">Todos los estados</option>
+                                        <option value="bajo">Stock Bajo</option>
+                                        <option value="normal">Stock Normal</option>
+                                        <option value="sin">Sin Stock</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="products-table">
+                            <thead>
+                                <tr>
+                                    <th>PRODUCTO</th>
+                                    <th>CATEGORÍA</th>
+                                    <th>PROVEEDOR</th>
+                                    <th>PRECIOS (Bs.)</th>
+                                    <th>STOCK</th>
+                                    <th>ESTADO</th>
+                                    <th>ACCIONES</th>
+                                </tr>
+                            </thead>
+                            <tbody id="productsTableBody">
+                                <!-- Datos cargados dinámicamente -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="table-footer">
+                        <div class="pagination">
+                            <button class="pagination-btn"><i class="fas fa-chevron-left"></i></button>
+                            <span class="pagination-info">Página 1 de 8</span>
+                            <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                        <div class="table-summary">
+                            Mostrando 10 de 156 productos
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Aviso de inventario -->
+                <div class="inventory-notice">
+                    <div class="notice-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="notice-content">
+                        <h4>Control de Inventario</h4>
+                        <p>Revise regularmente los niveles de stock y actualice los precios según los costos de proveedores.</p>
+                    </div>
+                </div>
+            </main>
+
+            <footer class="footer">
+                <div class="footer-content">
+                    <p class="footer-info">
+                        <i class="fas fa-info-circle"></i> 
+                        Sistema de Gestión Bolivia - Gestión de Productos
+                    </p>
+                    <p class="footer-update">
+                        Última actualización: Hoy, 09:15
+                    </p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Modal para agregar/editar producto -->
+    <div id="productModal" class="modal">
+        <div class="modal-content large-modal">
+            <div class="modal-header">
+                <h3><i class="fas fa-box"></i> <span id="modalTitle">Agregar Nuevo Producto</span></h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="productForm" class="modal-form">
+                <div class="form-grid">
+                    <!-- Información básica -->
+                    <div class="form-group full-width">
+                        <h4 class="form-section-title">
+                            <i class="fas fa-info-circle"></i> Información Básica
+                        </h4>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="productName">
+                            <i class="fas fa-tag"></i> Nombre del Producto *
+                        </label>
+                        <input type="text" id="productName" required placeholder="Ej: Arroz Integral 1kg">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="productCode">
+                            <i class="fas fa-barcode"></i> Código (Opcional)
+                        </label>
+                        <input type="text" id="productCode" placeholder="Código interno o SKU">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="productSupplier">
+                            <i class="fas fa-truck"></i> Proveedor *
+                        </label>
+                        <select id="productSupplier" required>
+                            <option value="">Seleccione un proveedor</option>
+                            <!-- Proveedores cargados dinámicamente -->
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="productCategory">
+                            <i class="fas fa-layer-group"></i> Categoría *
+                        </label>
+                        <div class="category-selector">
+                            <select id="productCategory" required>
+                                <option value="">Seleccione una categoría</option>
+                                <option value="alimentos">Alimentos</option>
+                                <option value="bebidas">Bebidas</option>
+                                <option value="limpieza">Limpieza</option>
+                                <option value="medicamentos">Medicamentos</option>
+                                <option value="electronica">Electrónica</option>
+                                <option value="ropa">Ropa</option>
+                                <option value="hogar">Hogar</option>
+                                <option value="oficina">Oficina</option>
+                            </select>
+                            <button type="button" id="addCategoryBtn" class="add-category-btn">
+                                <i class="fas fa-plus"></i> Nueva
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Sección de precios -->
+                    <div class="form-group full-width">
+                        <h4 class="form-section-title">
+                            <i class="fas fa-money-bill-wave"></i> Precios y Costos
+                        </h4>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="purchasePrice">
+                            <i class="fas fa-shopping-cart"></i> Precio Compra (Bs.) *
+                        </label>
+                        <input type="number" id="purchasePrice" required min="0" step="0.01" placeholder="0.00">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="salePriceNormal">
+                            <i class="fas fa-store"></i> Venta Normal (Bs.) *
+                        </label>
+                        <input type="number" id="salePriceNormal" required min="0" step="0.01" placeholder="0.00">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="salePriceRetail">
+                            <i class="fas fa-user-tag"></i> Venta Minorista (Bs.)
+                        </label>
+                        <input type="number" id="salePriceRetail" min="0" step="0.01" placeholder="0.00">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="salePriceWholesale">
+                            <i class="fas fa-users"></i> Venta Mayorista (Bs.)
+                        </label>
+                        <input type="number" id="salePriceWholesale" min="0" step="0.01" placeholder="0.00">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="salePriceSpecial">
+                            <i class="fas fa-star"></i> Venta Especial (Bs.)
+                        </label>
+                        <input type="number" id="salePriceSpecial" min="0" step="0.01" placeholder="0.00">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="salePriceOccasional">
+                            <i class="fas fa-clock"></i> Venta Ocasional (Bs.)
+                        </label>
+                        <input type="number" id="salePriceOccasional" min="0" step="0.01" placeholder="0.00">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="wholesaleQuantity">
+                            <i class="fas fa-boxes"></i> Cantidad Mayorista
+                        </label>
+                        <input type="number" id="wholesaleQuantity" min="1" placeholder="Mínimo para precio mayorista">
+                    </div>
+                    
+                    <!-- Sección de inventario -->
+                    <div class="form-group full-width">
+                        <h4 class="form-section-title">
+                            <i class="fas fa-boxes"></i> Control de Inventario
+                        </h4>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="currentStock">
+                            <i class="fas fa-cubes"></i> Stock Actual *
+                        </label>
+                        <input type="number" id="currentStock" required min="0" placeholder="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="minimumStock">
+                            <i class="fas fa-exclamation-circle"></i> Stock Mínimo
+                        </label>
+                        <input type="number" id="minimumStock" min="0" placeholder="Alerta cuando baje a este nivel">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reservedQuantity">
+                            <i class="fas fa-clock"></i> Cantidad Reservada
+                        </label>
+                        <input type="number" id="reservedQuantity" min="0" placeholder="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="unitMeasure">
+                            <i class="fas fa-balance-scale"></i> Unidad de Medida
+                        </label>
+                        <select id="unitMeasure">
+                            <option value="unidad">Unidad</option>
+                            <option value="kg">Kilogramo (kg)</option>
+                            <option value="litro">Litro (L)</option>
+                            <option value="paquete">Paquete</option>
+                            <option value="caja">Caja</option>
+                            <option value="docena">Docena</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Imagen del producto -->
+                    <div class="form-group full-width">
+                        <h4 class="form-section-title">
+                            <i class="fas fa-image"></i> Imagen del Producto
+                        </h4>
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <div class="image-upload-section">
+                            <div class="image-preview" id="imagePreview">
+                                <i class="fas fa-image"></i>
+                                <span>Vista previa de la imagen</span>
+                            </div>
+                            <div class="upload-controls">
+                                <input type="file" id="productImage" accept="image/*" style="display: none;">
+                                <button type="button" id="uploadImageBtn" class="upload-btn">
+                                    <i class="fas fa-upload"></i> Subir Imagen
+                                </button>
+                                <button type="button" id="removeImageBtn" class="remove-btn">
+                                    <i class="fas fa-trash"></i> Eliminar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Información adicional -->
+                    <div class="form-group full-width">
+                        <h4 class="form-section-title">
+                            <i class="fas fa-file-alt"></i> Información Adicional
+                        </h4>
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label for="productDescription">
+                            <i class="fas fa-align-left"></i> Descripción
+                        </label>
+                        <textarea id="productDescription" rows="3" placeholder="Descripción detallada del producto..."></textarea>
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label for="additionalInfo">
+                            <i class="fas fa-sticky-note"></i> Notas Adicionales
+                        </label>
+                        <textarea id="additionalInfo" rows="3" placeholder="Observaciones, características especiales..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="productStatus">
+                            <i class="fas fa-toggle-on"></i> Estado
+                        </label>
+                        <select id="productStatus" required>
+                            <option value="activo" selected>Activo</option>
+                            <option value="inactivo">Inactivo</option>
+                            <option value="descontinuado">Descontinuado</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn">Cancelar</button>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-save"></i> Guardar Producto
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para agregar nueva categoría -->
+    <div id="categoryModal" class="modal small-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-layer-group"></i> Agregar Nueva Categoría</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="categoryForm" class="modal-form">
+                <div class="form-group">
+                    <label for="newCategoryName">
+                        <i class="fas fa-folder"></i> Nombre de la Categoría *
+                    </label>
+                    <input type="text" id="newCategoryName" required placeholder="Ej: Bebidas Alcohólicas">
+                </div>
+                
+                <div class="form-group">
+                    <label for="newCategoryDescription">
+                        <i class="fas fa-align-left"></i> Descripción
+                    </label>
+                    <textarea id="newCategoryDescription" rows="2" placeholder="Descripción de la categoría..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="newCategoryStatus">
+                        <i class="fas fa-toggle-on"></i> Estado
+                    </label>
+                    <select id="newCategoryStatus">
+                        <option value="activo" selected>Activo</option>
+                        <option value="inactivo">Inactivo</option>
+                    </select>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn">Cancelar</button>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-plus"></i> Agregar Categoría
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../frontend/js/productos-script.js"></script>
+</body>
+</html>

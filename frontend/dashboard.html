@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Control - Gestión Bolivia</title>
+    <link rel="stylesheet" href="../frontend/css/dashboard-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Menú lateral -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-chart-pie"></i>
+                    <h2>Gestión Bolivia</h2>
+                </div>
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="user-details">
+                        <h3>Administrator</h3>
+                        <p class="user-role">Administrador del Sistema</p>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="sidebar-menu">
+                <div class="menu-section">
+                    <h4 class="menu-title">MENÚ PRINCIPAL</h4>
+                    <ul class="menu-items">
+                        <li class="menu-item active">
+                            <a href="#">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="menu-section">
+                    <h4 class="menu-title">OPERACIONES</h4>
+                    <ul class="menu-items">
+                        <li class="menu-item">
+                            <a href="#">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span>Ventas</span>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#">
+                                <i class="fas fa-money-bill-wave"></i>
+                                <span>Cobranza</span>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#">
+                                <i class="fas fa-shopping-bag"></i>
+                                <span>Compras</span>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#">
+                                <i class="fas fa-boxes"></i>
+                                <span>Inventario</span>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#">
+                                <i class="fas fa-tags"></i>
+                                <span>Productos</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="menu-section">
+                    <h4 class="menu-title">GESTIÓN</h4>
+                    <ul class="menu-items">
+                        <li class="menu-item">
+                            <a href="#">
+                                <i class="fas fa-truck"></i>
+                                <span>Proveedores</span>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="../frontend/clientes.html">
+                                <i class="fas fa-users"></i>
+                                <span>Clientes</span>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#">
+                                <i class="fas fa-chart-bar"></i>
+                                <span>Reportes</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="menu-section">
+                    <h4 class="menu-title">CONFIGURACIÓN</h4>
+                    <ul class="menu-items">
+                        <li class="menu-item">
+                            <a href="#">
+                                <i class="fas fa-cog"></i>
+                                <span>Ajustes</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-footer">
+                    <div class="system-info">
+                        <p><i class="fas fa-info-circle"></i> Versión 1.0.0</p>
+                        <p><i class="fas fa-database"></i> Estado: <span class="status-active">Activo</span></p>
+                    </div>
+                    <button class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                    </button>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Contenido principal -->
+        <div class="main-wrapper">
+            <header class="header">
+                <div class="header-left">
+                    <button class="menu-toggle" id="menuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="breadcrumb">
+                        <span>Dashboard</span>
+                        <i class="fas fa-chevron-right"></i>
+                        <span>Resumen</span>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="header-controls">
+                        <div class="date-selector">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Junio 2024</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="notification-bell">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-count">3</span>
+                        </div>
+                        <div class="user-menu">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="main-content">
+                <!-- Título principal -->
+                <div class="page-header">
+                    <h1><i class="fas fa-chart-line"></i> Panel de Control</h1>
+                    <p class="page-subtitle">Resumen de actividad comercial en lúdiviarios (Bs.)</p>
+                </div>
+
+                <!-- Métricas principales -->
+                <section class="metrics-grid">
+                    <div class="metric-card primary">
+                        <div class="metric-header">
+                            <h3>VENTAS DEL DÍA</h3>
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="metric-value">Bs. 1.250,00</div>
+                        <div class="metric-change positive">
+                            <i class="fas fa-arrow-up"></i> +92% vs. ayer
+                        </div>
+                    </div>
+
+                    <div class="metric-card secondary">
+                        <div class="metric-header">
+                            <h3>TRANSACCIONES</h3>
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <div class="metric-value">24</div>
+                        <div class="metric-change positive">
+                            <i class="fas fa-arrow-up"></i> +8,4% este mes
+                        </div>
+                    </div>
+
+                    <div class="metric-card warning">
+                        <div class="metric-header">
+                            <h3>STOCK BAJO</h3>
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="metric-value">8 productos</div>
+                        <div class="metric-alert">
+                            1 Requiere atención
+                        </div>
+                    </div>
+
+                    <div class="metric-card info">
+                        <div class="metric-header">
+                            <h3>VENTAS SEMANALES</h3>
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <div class="metric-value">Bs. 8.400,00</div>
+                        <div class="metric-description">
+                            Total acumulado últimos 7 días
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Gráfico y tabla -->
+                <section class="content-grid">
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3><i class="fas fa-chart-area"></i> Ventas de la Última Semana</h3>
+                            <div class="chart-legend">
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background-color: #3498db;"></span>
+                                    <span>Bs.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="salesChart"></canvas>
+                        </div>
+                        <div class="chart-days">
+                            <span class="day">LUN</span>
+                            <span class="day">MAR</span>
+                            <span class="day">MIE</span>
+                            <span class="day">JUE</span>
+                            <span class="day">VIE</span>
+                            <span class="day">SAB</span>
+                            <span class="day">DOM</span>
+                        </div>
+                    </div>
+
+                    <div class="sales-table-container">
+                        <div class="table-header">
+                            <h3><i class="fas fa-receipt"></i> Últimas Ventas Realizadas</h3>
+                            <button class="view-all-btn">Ver todo <i class="fas fa-arrow-right"></i></button>
+                        </div>
+                        <table class="sales-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>CLIENTE</th>
+                                    <th>FECHA</th>
+                                    <th>TOTAL (BS.)</th>
+                                    <th>EST</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="sale-id">RV-8240</td>
+                                    <td class="client">Carlos Mendoza</td>
+                                    <td class="date">Hace 15 min</td>
+                                    <td class="amount">480,00</td>
+                                    <td class="status completed">COM</td>
+                                </tr>
+                                <tr>
+                                    <td class="sale-id">RV-8239</td>
+                                    <td class="client">Maria Quispe</td>
+                                    <td class="date">Hace 1 hora</td>
+                                    <td class="amount">1.200,00</td>
+                                    <td class="status completed">COM</td>
+                                </tr>
+                                <tr>
+                                    <td class="sale-id">RV-8238</td>
+                                    <td class="client">Jorge Burgoa</td>
+                                    <td class="date">Hoy, 09:30</td>
+                                    <td class="amount">86,50</td>
+                                    <td class="status pending">FIN</td>
+                                </tr>
+                                <tr>
+                                    <td class="sale-id">RV-8237</td>
+                                    <td class="client">Ana Suarez</td>
+                                    <td class="date">Ayer</td>
+                                    <td class="amount">315,00</td>
+                                    <td class="status completed">COM</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Alertas de inventario -->
+                <section class="alerts-container">
+                    <div class="alerts-header">
+                        <h3><i class="fas fa-bell"></i> Alertas de Inventario</h3>
+                        <div class="alerts-count">4 productos</div>
+                    </div>
+                    <div class="alerts-grid">
+                        <div class="alert-card critical">
+                            <div class="alert-icon">
+                                <i class="fas fa-exclamation-circle"></i>
+                            </div>
+                            <div class="alert-content">
+                                <h4>HARINA DE TRIGO</h4>
+                                <p class="alert-detail">Stock: <span class="stock-low">2 uds.</span></p>
+                            </div>
+                            <button class="alert-action">Reabastecer</button>
+                        </div>
+                        
+                        <div class="alert-card warning">
+                            <div class="alert-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="alert-content">
+                                <h4>ACEITE VEGETAL</h4>
+                                <p class="alert-detail">Stock: <span class="stock-medium">5 uds.</span></p>
+                            </div>
+                            <button class="alert-action">Revisar</button>
+                        </div>
+                        
+                        <div class="alert-card warning">
+                            <div class="alert-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="alert-content">
+                                <h4>AZÚCAR RUBIA</h4>
+                                <p class="alert-detail">Stock: <span class="stock-medium">12 uds.</span></p>
+                            </div>
+                            <button class="alert-action">Revisar</button>
+                        </div>
+                        
+                        <div class="alert-card critical">
+                            <div class="alert-icon">
+                                <i class="fas fa-exclamation-circle"></i>
+                            </div>
+                            <div class="alert-content">
+                                <h4>LEJÍA PADEX®</h4>
+                                <p class="alert-detail">Stock: <span class="stock-low">3 uds.</span></p>
+                            </div>
+                            <button class="alert-action">Reabastecer</button>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <footer class="footer">
+                <div class="footer-content">
+                    <p class="footer-info">
+                        <i class="fas fa-info-circle"></i> 
+                        Sistema de Gestión e Inventario Bolivia - Versión 2.4.3
+                    </p>
+                    <p class="footer-update">
+                        Última actualización: Hoy, 14:30
+                    </p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="../frontend/js/dashboard-script.js"></script>
+</body>
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Proveedores - Sistema Bolivia</title>
+    <link rel="stylesheet" href="../frontend/css/proveedores-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Menú lateral -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-chart-pie"></i>
+                    <h2>Gestión Bolivia</h2>
+                </div>
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="user-details">
+                        <h3>Administrator</h3>
+                        <p class="user-role">Administrador del Sistema</p>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="sidebar-menu">
+                <div class="menu-section">
+                    <h4 class="menu-title">MENÚ PRINCIPAL</h4>
+                    <ul class="menu-items">
+                        <li class="menu-item">
+                            <a href="dashboard.html">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="menu-section">
+                    <h4 class="menu-title">OPERACIONES</h4>
+                    <ul class="menu-items">
+                        <li class="menu-item">
+                            <a href="#">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span>Ventas</span>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#">
+                                <i class="fas fa-money-bill-wave"></i>
+                                <span>Cobranza</span>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#">
+                                <i class="fas fa-shopping-bag"></i>
+                                <span>Compras</span>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#">
+                                <i class="fas fa-boxes"></i>
+                                <span>Inventario</span>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#">
+                                <i class="fas fa-tags"></i>
+                                <span>Productos</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="menu-section">
+                    <h4 class="menu-title">GESTIÓN</h4>
+                    <ul class="menu-items">
+                        <li class="menu-item">
+                            <a href="#">
+                                <i class="fas fa-truck"></i>
+                                <span>Proveedores</span>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="clientes.html">
+                                <i class="fas fa-users"></i>
+                                <span>Clientes</span>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#">
+                                <i class="fas fa-chart-bar"></i>
+                                <span>Reportes</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="menu-section">
+                    <h4 class="menu-title">CONFIGURACIÓN</h4>
+                    <ul class="menu-items">
+                        <li class="menu-item">
+                            <a href="#">
+                                <i class="fas fa-cog"></i>
+                                <span>Ajustes</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-footer">
+                    <div class="system-info">
+                        <p><i class="fas fa-info-circle"></i> Versión 2.4.3</p>
+                        <p><i class="fas fa-database"></i> Estado: <span class="status-active">Activo</span></p>
+                    </div>
+                    <button class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                    </button>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Contenido principal -->
+        <div class="main-wrapper">
+            <header class="header">
+                <div class="header-left">
+                    <button class="menu-toggle" id="menuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="breadcrumb">
+                        <span>Gestión</span>
+                        <i class="fas fa-chevron-right"></i>
+                        <span>Proveedores</span>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="header-controls">
+                        <div class="date-selector">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Junio 2024</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="notification-bell">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-count">1</span>
+                        </div>
+                        <div class="user-menu">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="main-content">
+                <!-- Encabezado de la página -->
+                <div class="page-header">
+                    <div class="page-title">
+                        <h1><i class="fas fa-truck"></i> Proveedores</h1>
+                        <p class="page-subtitle">Directorio centralizado de sus socios comerciales y suministradores en Bolivia.</p>
+                    </div>
+                    <button class="add-supplier-btn" id="addSupplierBtn">
+                        <i class="fas fa-plus-circle"></i> Agregar Proveedor
+                    </button>
+                </div>
+
+                <!-- Listado de proveedores -->
+                <section class="suppliers-section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-list"></i> Listado de Proveedores</h3>
+                        <div class="section-actions">
+                            <div class="search-box">
+                                <i class="fas fa-search"></i>
+                                <input type="text" id="searchSupplier" placeholder="Buscar proveedor...">
+                            </div>
+                            <div class="filter-dropdown">
+                                <select id="statusFilter">
+                                    <option value="">Todos los estados</option>
+                                    <option value="activo">Activo</option>
+                                    <option value="inactivo">Inactivo</option>
+                                    <option value="pendiente">Pendiente</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="suppliers-table">
+                            <thead>
+                                <tr>
+                                    <th>EMPRESA</th>
+                                    <th>RESPONSABLE</th>
+                                    <th>CONTACTO</th>
+                                    <th>ESTADO</th>
+                                    <th>ACCIONES</th>
+                                </tr>
+                            </thead>
+                            <tbody id="suppliersTableBody">
+                                <!-- Datos cargados dinámicamente -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="table-footer">
+                        <div class="pagination">
+                            <button class="pagination-btn"><i class="fas fa-chevron-left"></i></button>
+                            <span class="pagination-info">Página 1 de 4</span>
+                            <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                        <div class="table-summary">
+                            Mostrando 3 de 48 proveedores
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Aviso informativo -->
+                <div class="info-notice">
+                    <div class="notice-icon">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <div class="notice-content">
+                        <h4>Importante</h4>
+                        <p>Mantenga actualizada la información de sus proveedores para una mejor gestión de compras y suministros.</p>
+                    </div>
+                </div>
+            </main>
+
+            <footer class="footer">
+                <div class="footer-content">
+                    <p class="footer-info">
+                        <i class="fas fa-info-circle"></i> 
+                        Sistema de Gestión Bolivia - Gestión de Proveedores
+                    </p>
+                    <p class="footer-update">
+                        Última actualización: Hoy, 10:30
+                    </p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Modal para agregar/editar proveedor -->
+    <div id="supplierModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-user-plus"></i> <span id="modalTitle">Agregar Nuevo Proveedor</span></h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="supplierForm" class="modal-form">
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label for="companyName">
+                            <i class="fas fa-building"></i> Nombre de la Empresa *
+                        </label>
+                        <input type="text" id="companyName" required placeholder="Ej: Corporación ABC S.A.">
+                        <small class="form-help">Ej: Suministros Médicos S.R.L. N°11 00185/175</small>
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label for="responsiblePerson">
+                            <i class="fas fa-user-tie"></i> Persona Responsable *
+                        </label>
+                        <input type="text" id="responsiblePerson" required placeholder="Nombre completo del contacto">
+                        <small class="form-help">Persona principal de contacto en la empresa</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phoneNumber">
+                            <i class="fas fa-phone"></i> Número de Celular *
+                        </label>
+                        <div class="phone-input-group">
+                            <span class="country-code">+591</span>
+                            <input type="tel" id="phoneNumber" required placeholder="71234567">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="nitNumber">
+                            <i class="fas fa-id-card"></i> NIT (Opcional)
+                        </label>
+                        <input type="text" id="nitNumber" placeholder="Nº de identidad tributaria">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">
+                            <i class="fas fa-envelope"></i> Correo Electrónico
+                        </label>
+                        <input type="email" id="email" placeholder="correo@empresa.bo">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="website">
+                            <i class="fas fa-globe"></i> Sitio Web (Opcional)
+                        </label>
+                        <input type="url" id="website" placeholder="https://www.empresa.bo">
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label for="address">
+                            <i class="fas fa-map-marker-alt"></i> Dirección
+                        </label>
+                        <input type="text" id="address" placeholder="Dirección de la empresa">
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label for="additionalInfo">
+                            <i class="fas fa-info-circle"></i> Información Adicional
+                        </label>
+                        <textarea id="additionalInfo" rows="4" placeholder="Condiciones de pago, horarios de atención, productos que suministra, etc."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="paymentTerms">
+                            <i class="fas fa-file-invoice-dollar"></i> Condiciones de Pago
+                        </label>
+                        <select id="paymentTerms">
+                            <option value="">Seleccionar</option>
+                            <option value="contado">Contado</option>
+                            <option value="15dias">15 días</option>
+                            <option value="30dias">30 días</option>
+                            <option value="60dias">60 días</option>
+                            <option value="otro">Otra</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="supplierStatus">
+                            <i class="fas fa-toggle-on"></i> Estado
+                        </label>
+                        <select id="supplierStatus" required>
+                            <option value="activo" selected>Activo</option>
+                            <option value="inactivo">Inactivo</option>
+                            <option value="pendiente">Pendiente</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label>
+                            <i class="fas fa-sticky-note"></i> Notas Internas
+                        </label>
+                        <textarea id="internalNotes" rows="3" placeholder="Notas internas sobre el proveedor..."></textarea>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn">Cancelar</button>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-save"></i> Guardar Proveedor
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../frontend/js/proveedores-script.js"></script>
+</body>
+</html>

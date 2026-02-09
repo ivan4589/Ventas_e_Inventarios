@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Clientes - Sistema Bolivia</title>
+    <link rel="stylesheet" href="../frontend/css/clientes-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+    <div class="container">
+        <!-- Menú lateral -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-chart-pie"></i>
+                    <h2>Gestión Bolivia</h2>
+                </div>
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="user-details">
+                        <h3>Administrator</h3>
+                        <p class="user-role">Administrador del Sistema</p>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="sidebar-menu">
+                <div class="menu-section">
+                    <h4 class="menu-title">MENÚ PRINCIPAL</h4>
+                    <ul class="menu-items">
+                        <li class="menu-item">
+                            <a href="dashboard.html">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="menu-section">
+                    <h4 class="menu-title">OPERACIONES</h4>
+                    <ul class="menu-items">
+                        <li class="menu-item">
+                            <a href="#">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span>Ventas</span>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#">
+                                <i class="fas fa-money-bill-wave"></i>
+                                <span>Cobranza</span>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#">
+                                <i class="fas fa-shopping-bag"></i>
+                                <span>Compras</span>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#">
+                                <i class="fas fa-boxes"></i>
+                                <span>Inventario</span>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#">
+                                <i class="fas fa-tags"></i>
+                                <span>Productos</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="menu-section">
+                    <h4 class="menu-title">GESTIÓN</h4>
+                    <ul class="menu-items">
+                        <li class="menu-item">
+                            <a href="#">
+                                <i class="fas fa-truck"></i>
+                                <span>Proveedores</span>
+                            </a>
+                        </li>
+                        <li class="menu-item active">
+                            <a href="#">
+                                <i class="fas fa-users"></i>
+                                <span>Clientes</span>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#">
+                                <i class="fas fa-chart-bar"></i>
+                                <span>Reportes</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="menu-section">
+                    <h4 class="menu-title">CONFIGURACIÓN</h4>
+                    <ul class="menu-items">
+                        <li class="menu-item">
+                            <a href="#">
+                                <i class="fas fa-cog"></i>
+                                <span>Ajustes</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-footer">
+                    <div class="system-info">
+                        <p><i class="fas fa-info-circle"></i> Versión 2.4.3</p>
+                        <p><i class="fas fa-database"></i> Estado: <span class="status-active">Activo</span></p>
+                    </div>
+                    <button class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                    </button>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Contenido principal -->
+        <div class="main-wrapper">
+            <header class="header">
+                <div class="header-left">
+                    <button class="menu-toggle" id="menuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="breadcrumb">
+                        <span>Gestión</span>
+                        <i class="fas fa-chevron-right"></i>
+                        <span>Clientes</span>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="header-controls">
+                        <div class="date-selector">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Junio 2024</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="notification-bell">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-count">2</span>
+                        </div>
+                        <div class="user-menu">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="main-content">
+                <!-- Encabezado de la página -->
+                <div class="page-header">
+                    <div class="page-title">
+                        <h1><i class="fas fa-users"></i> Gestión de Clientes</h1>
+                        <p class="page-subtitle">Administra la base de datos, ubicaciones y saldos de tus compradores.</p>
+                    </div>
+                    <button class="add-client-btn" id="addClientBtn">
+                        <i class="fas fa-plus-circle"></i> Agregar Cliente
+                    </button>
+                </div>
+
+                <!-- Métricas de clientes -->
+                <section class="metrics-grid">
+                    <div class="metric-card primary">
+                        <div class="metric-header">
+                            <h3>TOTAL CLIENTES</h3>
+                            <i class="fas fa-user-friends"></i>
+                        </div>
+                        <div class="metric-value">1,248</div>
+                        <div class="metric-change positive">
+                            <i class="fas fa-arrow-up"></i> + 112 este mes
+                        </div>
+                    </div>
+
+                    <div class="metric-card secondary">
+                        <div class="metric-header">
+                            <h3>VENTAS TOTALES (BS.)</h3>
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="metric-value">45.820,00 Bs.</div>
+                        <div class="metric-description">
+                            Acumulado anual
+                        </div>
+                    </div>
+
+                    <div class="metric-card warning">
+                        <div class="metric-header">
+                            <h3>TICKET PROMEDIO</h3>
+                            <i class="fas fa-receipt"></i>
+                        </div>
+                        <div class="metric-value">350,50 Bs.</div>
+                        <div class="metric-description">
+                            Por transacción
+                        </div>
+                    </div>
+
+                    <div class="metric-card info">
+                        <div class="metric-header">
+                            <h3>LOCALIDADES</h3>
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="metric-value">9 Ciudades</div>
+                        <div class="metric-description">
+                            Cobertura nacional
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Filtros y tabla de clientes -->
+                <section class="clients-section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-list"></i> Lista de Clientes</h3>
+                        <div class="section-actions">
+                            <div class="search-box">
+                                <i class="fas fa-search"></i>
+                                <input type="text" id="searchClient" placeholder="Filtra por nombre...">
+                            </div>
+                            <div class="filter-dropdown">
+                                <select id="cityFilter">
+                                    <option value="">Todas las ciudades</option>
+                                    <option value="La Paz">La Paz</option>
+                                    <option value="Santa Cruz">Santa Cruz</option>
+                                    <option value="Cochabamba">Cochabamba</option>
+                                    <option value="Oruro">Oruro</option>
+                                    <option value="Potosi">Potosi</option>
+                                    <option value="Tarija">Tarija</option>
+                                    <option value="Sucre">Sucre</option>
+                                    <option value="Beni">Beni</option>
+                                    <option value="Pando">Pando</option>
+                                </select>
+                            </div>
+                            <div class="filter-dropdown">
+                                <select id="typeFilter">
+                                    <option value="">Todos los tipos</option>
+                                    <option value="minorista">Cliente Camino</option>
+                                    <option value="mayorista">Minorista</option>
+                                    <option value="corporativo">Mayorista</option>
+                                    <option value="especial">Especial</option>
+                                    <option value="ocasional">Ocasional</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="clients-table">
+                            <thead>
+                                <tr>
+                                    <th>NOMBRE</th>
+                                    <th>ALIAS</th>
+                                    <th>LOCALIDAD</th>
+                                    <th>TIPO DE CLIENTE</th>
+                                    <th>CELULAR</th>
+                                    <th>COMPRAS (BS.)</th>
+                                    <th>ACCIONES</th>
+                                </tr>
+                            </thead>
+                            <tbody id="clientsTableBody">
+                                <!-- Datos cargados dinámicamente -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="table-footer">
+                        <div class="pagination">
+                            <button class="pagination-btn"><i class="fas fa-chevron-left"></i></button>
+                            <span class="pagination-info">Página 1 de 5</span>
+                            <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                        <div class="table-summary">
+                            Mostrando 4 de 1,248 clientes
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Aviso rápido -->
+                <div class="quick-notice">
+                    <div class="notice-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div class="notice-content">
+                        <h4>Aviso rápido</h4>
+                        <p>Presiona: <span class="shortcut-key">CTRL + N</span> para abrir el formulario de cliente desde cualquier pantalla.</p>
+                    </div>
+                </div>
+            </main>
+
+            <footer class="footer">
+                <div class="footer-content">
+                    <p class="footer-info">
+                        <i class="fas fa-info-circle"></i> 
+                        Sistema de Gestión Bolivia - Gestión de Clientes
+                    </p>
+                    <p class="footer-update">
+                        Última actualización: Hoy, 16:45
+                    </p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Modal para agregar/editar cliente -->
+    <div id="clientModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-user-plus"></i> <span id="modalTitle">Agregar Nuevo Cliente</span></h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="clientForm" class="modal-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="clientName">
+                            <i class="fas fa-user"></i> Nombre Completo *
+                        </label>
+                        <input type="text" id="clientName" required placeholder="Ej: Juan Pérez López">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="clientAlias">
+                            <i class="fas fa-signature"></i> Alias (Apodo)
+                        </label>
+                        <input type="text" id="clientAlias" placeholder="Ej: Juancito">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="clientLocation">
+                            <i class="fas fa-map-marker-alt"></i> Localidad *
+                        </label>
+                        <div class="location-selector">
+                            <select id="clientLocation" required>
+                                <option value="">Seleccione una localidad</option>
+                                <option value="La Paz">La Paz</option>
+                                <option value="Santa Cruz">Santa Cruz</option>
+                                <option value="Cochabamba">Cochabamba</option>
+                                <option value="Oruro">Oruro</option>
+                                <option value="Potosi">Potosi</option>
+                                <option value="Tarija">Tarija</option>
+                                <option value="Sucre">Sucre</option>
+                                <option value="Beni">Beni</option>
+                                <option value="Pando">Pando</option>
+                            </select>
+                            <button type="button" id="addLocationBtn" class="add-location-btn">
+                                <i class="fas fa-plus"></i> Nueva
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- En la sección del formulario dentro del modal, agregar después del campo de localidad -->
+<div class="form-group">
+    <label for="clientType">
+        <i class="fas fa-user-tag"></i> Tipo de Cliente *
+    </label>
+    <select id="clientType" required>
+        <option value="">Seleccione un tipo</option>
+        <option value="minorista">Cliente Camino</option>
+        <option value="mayorista">Minorista</option>
+        <option value="corporativo">Mayorista</option>
+        <option value="especial">Especial</option>
+        <option value="ocasional">Ocasional</option>
+    </select>
+</div>
+                    
+                    <div class="form-group">
+                        <label for="clientPhone">
+                            <i class="fas fa-phone"></i> Número de Celular *
+                        </label>
+                        <input type="tel" id="clientPhone" required placeholder="Ej: 70123456">
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label for="clientAddress">
+                            <i class="fas fa-home"></i> Dirección
+                        </label>
+                        <input type="text" id="clientAddress" placeholder="Ej: Calle Murillo #123, Zona Central">
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label>
+                            <i class="fas fa-map"></i> Ubicación GPS de la Tienda
+                        </label>
+                        <div class="gps-section">
+                            <div id="mapContainer">
+                                <div id="map"></div>
+                            </div>
+                            <div class="gps-controls">
+                                <button type="button" id="locateMeBtn" class="gps-btn">
+                                    <i class="fas fa-crosshairs"></i> Mi Ubicación
+                                </button>
+                                <button type="button" id="searchAddressBtn" class="gps-btn">
+                                    <i class="fas fa-search"></i> Buscar Dirección
+                                </button>
+                                <div class="coordinates">
+                                    <div class="coordinate-input">
+                                        <label>Latitud:</label>
+                                        <input type="text" id="latitude" readonly placeholder="-16.5000">
+                                    </div>
+                                    <div class="coordinate-input">
+                                        <label>Longitud:</label>
+                                        <input type="text" id="longitude" readonly placeholder="-68.1500">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label for="additionalInfo">
+                            <i class="fas fa-info-circle"></i> Información Adicional
+                        </label>
+                        <textarea id="additionalInfo" rows="4" placeholder="Notas, preferencias, observaciones..."></textarea>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn">Cancelar</button>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-save"></i> Guardar Cliente
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para agregar nueva localidad -->
+    <div id="locationModal" class="modal small-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-map-marker-alt"></i> Agregar Nueva Localidad</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="locationForm" class="modal-form">
+                <div class="form-group">
+                    <label for="newLocationName">
+                        <i class="fas fa-city"></i> Nombre de la Ciudad/Localidad *
+                    </label>
+                    <input type="text" id="newLocationName" required placeholder="Ej: El Alto">
+                </div>
+                
+                <div class="form-group">
+                    <label for="newLocationDepartment">
+                        <i class="fas fa-globe-americas"></i> Departamento
+                    </label>
+                    <select id="newLocationDepartment">
+                        <option value="">Seleccione departamento</option>
+                        <option value="La Paz">La Paz</option>
+                        <option value="Santa Cruz">Santa Cruz</option>
+                        <option value="Cochabamba">Cochabamba</option>
+                        <option value="Oruro">Oruro</option>
+                        <option value="Potosi">Potosi</option>
+                        <option value="Tarija">Tarija</option>
+                        <option value="Chuquisaca">Chuquisaca</option>
+                        <option value="Beni">Beni</option>
+                        <option value="Pando">Pando</option>
+                    </select>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn">Cancelar</button>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-plus"></i> Agregar Localidad
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="../frontend/js/clientes-script.js"></script>
+</body>
+</html>
